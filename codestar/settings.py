@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['.herokuapp.com',]
+ALLOWED_HOSTS = ['.herokuapp.com', '127.0.0.1',]
 
 
 # Application definition
@@ -89,6 +89,11 @@ WSGI_APPLICATION = 'codestar.wsgi.application'
 DATABASES = {
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL", "postgresql://neondb_owner:npg_NlvUi8Z7HJeW@ep-tiny-wave-a2htx0ai.eu-central-1.aws.neon.tech/oval_lazy_skirt_523375"))
 }
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.codeinstitute-ide.net/",
+    "https://*.herokuapp.com"
+]
 
 
 # Password validation
