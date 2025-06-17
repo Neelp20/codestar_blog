@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User  # Import models to connect
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
@@ -21,3 +21,12 @@ class Post(models.Model):
     # The auto_now argument for the updated_on field sets the value 
     # to the current date and time whenever the record is saved, 
     # not just when it is created.
+
+    class Comment(models.Model):
+         post = models.ForeignKey(
+              Post, on_delete=models.CASCADE, related_name="comments")
+         author = models.ForeignKey(
+              User, on_delete=models.CASCADE, related_name="commenter")
+         body = models.TextField()
+         approved = models.BooleanField(default=False)
+         created_on = models.DateTimeField(auto_now_add=True)                 
