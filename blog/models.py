@@ -18,10 +18,17 @@ class Post(models.Model):
     excerpt = models.TextField(blank=True)
     updated_on = models.DateTimeField(auto_now=True)
 
+    class Meta:
+        ordering = ["-created_on"]
+
+    def __str__(self):
+        return f"The title of this post is {self.title}"
+        
+
     # The auto_now argument for the updated_on field sets the value 
     # to the current date and time whenever the record is saved, 
     # not just when it is created.
-    
+
 
 class Comment(models.Model):
     post = models.ForeignKey(
@@ -30,4 +37,10 @@ class Comment(models.Model):
         User, on_delete=models.CASCADE, related_name="commenter")
     body = models.TextField()
     approved = models.BooleanField(default=False)
-    created_on = models.DateTimeField(auto_now_add=True)                 
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_on"]
+
+    def __str__(self):
+        return f"Comment {self.body} by {self.author}"           
