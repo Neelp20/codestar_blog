@@ -10,7 +10,7 @@ class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name="blog_posts"   
+        User, on_delete=models.CASCADE, related_name="blog_posts"
     )
     content = models.TextField()
     created_on = models.DateTimeField(auto_now_add=True)
@@ -23,10 +23,9 @@ class Post(models.Model):
 
     def __str__(self):
         return f"The title of this post is {self.title}"
-        
 
-    # The auto_now argument for the updated_on field sets the value 
-    # to the current date and time whenever the record is saved, 
+    # The auto_now argument for the updated_on field sets the value
+    # to the current date and time whenever the record is saved,
     # not just when it is created.
 
 
@@ -44,4 +43,4 @@ class Comment(models.Model):
         ordering = ["created_on"]
 
     def __str__(self):
-        return f"Comment {self.body} by {self.author}"           
+        return f"Comment {self.body} by {self.author}"
