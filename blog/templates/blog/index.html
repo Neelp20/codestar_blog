@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block content %}
 
 <!-- index.html content starts here -->
@@ -19,13 +18,13 @@
                   class="card-img-top"
                   src="{% static 'images/default.jpg' %}"
                   alt="placeholder image"
-                />
+                >
                 {% else %}
                 <img
                   class="card-img-top"
                   src=" {{ post.featured_image.url }}"
                   alt="{{ post.title }}"
-                />
+                >
                 {% endif %}
                 <div class="image-flash">
                   <p class="author">Author: {{ post.author }}</p>
@@ -43,7 +42,10 @@
 
         {% if forloop.counter|divisibleby:3 %}
       </div>
-      <div class="row">{% endif %} {% endfor %}</div>
+      <div class="row">
+        {% endif %} 
+        {% endfor %}
+      </div>
     </div>
   </div>
   {% if is_paginated %}
@@ -55,7 +57,8 @@
           >&laquo; PREV</a
         >
       </li>
-      {% endif %} {% if page_obj.has_next %}
+      {% endif %}
+      {% if page_obj.has_next %}
       <li>
         <a href="?page={{ page_obj.next_page_number }}" class="page-link">
           NEXT &raquo;</a
@@ -69,3 +72,4 @@
 
 <!-- index.html content ends here -->
 {% endblock %}
+{% block copyright %}Copyright 2023 Matt Rudge{% endblock %}

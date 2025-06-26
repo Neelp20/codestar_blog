@@ -8,6 +8,9 @@ STATUS = ((0, "Draft"), (1, "Published"))
 
 
 class Post(models.Model):
+    """
+    Stores a single blog post entry related to :model:`auth.User`.
+    """
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(
@@ -24,7 +27,7 @@ class Post(models.Model):
         ordering = ["-created_on"]
 
     def __str__(self):
-        return f"The title of this post is {self.title}"
+        return f"{self.title} | written by {self.author}"
 
     # The auto_now argument for the updated_on field sets the value
     # to the current date and time whenever the record is saved,
@@ -32,15 +35,18 @@ class Post(models.Model):
 
 
 class Comment(models.Model):
+    """
+    Stores a single comment entry related to :model:`auth.User`
+    and :model:`blog.Post`.
+    """
     post = models.ForeignKey(
         Post, on_delete=models.CASCADE, related_name="comments")
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="commenter")
     body = models.TextField()
-    approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
-    # new_field = models.SlugField()
-
+    approved = models.BooleanField(default=False)
+    
     class Meta:
         ordering = ["created_on"]
 
